@@ -1,2 +1,4 @@
 # V2Box-Client-Config-ios
-this config work for V2Box IOS Client for v2ray reality (add missing options to config file)
+1. replace your server data 
+2. add config as (import V2ray json form clipboard) and enjoy.
+
