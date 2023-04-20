@@ -1,0 +1,108 @@
+{
+  "log": {
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+      "listen": "127.0.0.1",
+      "protocol": "socks",
+      "settings": {
+        "udp": true,
+        "auth": "noauth",
+        "userLevel": 8
+      },
+      "sniffing": {
+        "destOverride": ["http", "tls"],
+        "enabled": true
+      },
+      "tag": "socks",
+      "port": 10808
+    },
+    {
+      "listen": "127.0.0.1",
+      "port": 10809,
+      "protocol": "http",
+      "settings": {
+        "userLevel": 8
+      },
+      "tag": "http"
+    }
+  ],
+  "outbounds": [
+    {
+      "mux": {
+        "enabled": false,
+        "concurrency": 8
+      },
+      "protocol": "vless",
+      "streamSettings": {
+        "tcpSettings": {
+          "header": {
+            "type": "none",
+            "request": {
+              "path": [""],
+              "method": "",
+              "headers": {
+                "Accept-Encoding": [],
+                "Host": [],
+                "Connection": [],
+                "Pragma": "",
+                "User-Agent": []
+              },
+              "version": ""
+            }
+          }
+        },
+        "security": "reality",
+        "realitySettings": {
+          "allowInsecure": false,
+          "spiderX": "/",
+          "publicKey": "Your Public Key",
+          "show": false,
+          "serverName": "Server Name",
+          "shortId": "Your Short Id",
+          "fingerprint": "chrome"
+        },
+        "network": "tcp"
+      },
+      "tag": "proxy",
+      "settings": {
+        "vnext": [
+          {
+            "address": "Your Server Address",
+            "users": [
+              {
+                "encryption": "none",
+                "id": "Your Uid",
+                "level": 8,
+                "flow": "xtls-rprx-vision",
+                "security": "auto"
+              }
+            ],
+            "port": User Port
+          }
+        ]
+      }
+    }
+  ],
+  "dns": {
+    "hosts": {
+      "domain:googleapis.cn": "googleapis.com"
+    },
+    "servers": ["1.1.1.1"]
+  },
+  "routing": {
+    "settings": {
+      "domainStrategy": "IPIfNonMatch",
+      "rules": [
+        {
+          "ip": ["1.1.1.1"],
+          "outboundTag": "proxy",
+          "port": "53",
+          "type": "field"
+        }
+      ]
+    }
+  },
+  "transport": {}
+}
