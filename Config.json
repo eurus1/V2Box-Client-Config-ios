@@ -1,4 +1,4 @@
-{
+#{
   "log": {
     "loglevel": "warning"
   },
@@ -105,4 +105,4 @@
     }
   },
   "transport": {}
-}
+  }
